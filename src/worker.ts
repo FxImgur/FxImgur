@@ -12,7 +12,7 @@ function oembedHandler(url: URL, request: Request): Response {
 	const out = {
 		version: '1.0',
 		type: 'link',
-		provider_name: 'FxImgur',
+		provider_name: 'Imgur, via FxImgur',
 		provider_url: 'https://github.com/FxImgur/FxImgur',
 		title: 'Embed',
 		author_name: text,
@@ -38,8 +38,8 @@ async function imgurLookup(url: URL, request: Request): Promise<Response> {
 	target.protocol = 'https:';
 
 	// Any request not from a bot like Discord? Just forward the user.
-	//if (!isBotRequest(request))
-	//	return redirectToImgur(url);
+	if (!isBotRequest(request))
+		return redirectToImgur(url);
 
 	// See what we can learn about this URL.
 	const data = await extractImgurData(target);
